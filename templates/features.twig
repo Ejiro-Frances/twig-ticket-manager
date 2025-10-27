@@ -1,0 +1,10 @@
+<section class="max-w-6xl mx-auto py-20">
+    <ul class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {% for feature in features %}
+            <li class="border border-primary rounded-md shadow hover:bg-primary hover:text-foreground hover:shadow-2xl p-10 transition-all duration-200 ease-in">
+                <h5 class="font-semibold mb-2">{{ feature.title }}</h5>
+                <p class="text-sm">{{ feature.body }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</section>

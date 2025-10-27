@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Taskify{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'oklch(19.171% 0.03836 230.362)',
+                        foreground: 'oklch(0.985 0 0)',
+                    },
+                     animation: {
+                    float: 'float 6s ease-in-out infinite',
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0px)' },
+                        '50%': { transform: 'translateY(-20px)' },
+                    }
+                }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    {% include 'navbar.twig' %}
+    
+    <main class="pt-20">
+        {% block content %}{% endblock %}
+    </main>
+
+     {% include 'footer.twig' %}
+</body>
+</html>
