@@ -1,6 +1,6 @@
 FROM php:8.2-cli
 
-# Install system dependencies and PHP extensions
+# Install system dependencies, git, unzip, and PHP extensions
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -14,14 +14,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /app
 
-# Copy composer files first
-COPY composer.json composer.lock ./
-
-# Install dependencies with verbose output
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist -vvv
-
-# Copy rest of application
+# Copy project files
 COPY . .
+
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader
 
 # Expose port
 EXPOSE 8000
