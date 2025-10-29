@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Taskify{% endblock %}</title>
+    <title>{% block title %}Ticket Zen{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,6 +12,8 @@
                     colors: {
                         primary: 'oklch(19.171% 0.03836 230.362)',
                         foreground: 'oklch(0.985 0 0)',
+                        secondary: 'oklch(75.236% 0.14929 235.166)',
+                        accent: 'oklch(58.415% 0.23329 280.771)'
                     },
                      animation: {
                     float: 'float 6s ease-in-out infinite',
@@ -36,4 +38,9 @@
 
      {% include 'footer.twig' %}
 </body>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+</script>
+
 </html>

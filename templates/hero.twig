@@ -1,70 +1,163 @@
-<section class="relative overflow-hidden bg-foreground text-foreground min-h-[90vh]">
-    {# SVG Wavy Background - positioned to cover hero #}
-    <div class="absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
-        <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-            {# Base background rectangle to match hero background #}
-            <rect width="1440" height="600" fill="transparent" />
-            {# Wavy layer 1 #}
-            <path d="M0,320 C200,420 400,260 720,320 C1040,380 1240,220 1440,300 L1440,600 L0,600 Z" fill="oklch(19.171% 0.03836 230.362)" />
-            {# Wavy layer 2 (deeper, near bottom) #}
-            <path d="M0,380 C220,460 460,280 760,360 C1060,440 1260,260 1440,320 L1440,600 L0,600 Z" fill="oklch(58.415% 0.23329 280.771 / 0.035)" />
-            {# Decorative top-right svg circle #}
-            <g transform="translate(1160,90)">
-                <circle r="32" fill="oklch(85.5% 0.14929 235.166)" />
-            </g>
-        </svg>
-    </div>
+<section
+  data-testid="test-hero-container"
+  class="relative overflow-hidden bg-primary text-foreground min-h-[90vh]"
+>
+  {# SVG Wavy Background #}
+  <div class="absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
+    <svg
+      class="w-full h-full"
+      preserveAspectRatio="none"
+      viewBox="0 0 1440 600"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      role="img"
+    >
+      <rect width="1440" height="600" fill="transparent" />
+      <path
+        d="M0,320 C200,420 400,260 720,320 C1040,380 1240,220 1440,300 L1440,600 L0,600 Z"
+        fill="oklch(15% 0.03 230)"
+        opacity="0.8"
+      />
+      <path
+        d="M0,380 C220,460 460,280 760,360 C1060,440 1260,260 1440,320 L1440,600 L0,600 Z"
+        fill="oklch(12% 0.025 230)"
+        opacity="0.6"
+      />
+      <g transform="translate(1160,90)">
+        <circle r="32" fill="oklch(75.236% 0.14929 235.166)" opacity="0.8" />
+      </g>
+    </svg>
+  </div>
 
-    {# Decorative Circles #}
-    {% include 'bgcircles.twig' %}
+  {# include decorative circles as a separate Twig partial #}
+  {% include "/bgcircles.twig" %}
 
-    {# Hero content #}
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 lg:py-32">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="max-w-2xl">
-                <h1 class="text-primary text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
-                    Smart, simple ticket management
-                </h1>
-                <p class="text-white bg-primary/70 text-lg mb-10">
-                    Create, assign and resolve tickets faster. A modern workflow with useful analytics and role-based dashboards.
-                </p>
+  {# Hero content #}
+  <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="max-w-2xl">
+        <h1
+          data-testid="test-hero-title"
+          class="text-foreground text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4"
+        >
+          Smart, simple ticket management
+        </h1>
 
-                <div class="relative z-40 flex flex-wrap gap-5">
-                    <button class="bg-foreground inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-95 text-black font-semibold shadow-md">
-                        Get started
-                    </button>
-                    <button class="bg-transparent inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-foreground text-foreground">
-                        Learn more
-                    </button>
-                </div>
-            </div>
+        <p
+          data-testid="test-hero-description"
+          class="text-white text-lg mb-10"
+        >
+          Create, assign and resolve tickets faster. A modern workflow with useful analytics and role-based dashboards.
+        </p>
 
-            {# Right-hand visual #}
-            <div class="relative">
-                {# Example mockup card #}
-                <div class="bg-gradient-to-b bg-white rounded-3xl p-6 shadow-2xl border border-white/5 backdrop-blur-md text-primary">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-medium">Ticket #421</span>
-                        <span class="text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-400">
-                            Open
-                        </span>
-                    </div>
+        <div
+          data-testid="test-hero-buttons"
+          class="relative z-40 flex flex-wrap gap-5"
+        >
+          <a
+            href="/auth/signup"
+            data-testid="test-hero-signup-button"
+            class="bg-foreground text-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-95 font-semibold shadow-md transition-all hover:scale-105"
+          >
+            Get started
+          </a>
 
-                    <h4 class="font-semibold text-lg mb-2">
-                        User cannot connect to workspace
-                    </h4>
-                    <p class="text-sm text-foreground/70 mb-3">
-                        The user reports sudden disconnects when joining meetings.
-                    </p>
-
-                    <div class="flex items-center gap-3">
-                        <div>
-                            <div class="text-sm font-medium">Assigned to Ada</div>
-                            <div class="text-xs text-foreground/60">2 hours ago</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <a
+            href="#features"
+            data-testid="test-hero-learn-more-link"
+            class="bg-transparent inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-foreground text-foreground hover:bg-foreground/10 transition-all"
+          >
+            Learn more
+          </a>
         </div>
+      </div>
+
+      {# Right-hand visual mockup #}
+      <div class="relative">
+        <div
+          class="bg-foreground rounded-3xl p-6 shadow-2xl border border-foreground/10 backdrop-blur-md text-primary transform hover:scale-105 transition-all duration-300"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-sm font-medium">Ticket #421</span>
+            <div class="space-x-3">
+              <span class="text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-400">
+                Open
+              </span>
+              <span class="text-xs px-3 py-1 rounded-full bg-amber-500/20 text-amber-400">
+                Medium
+              </span>
+            </div>
+          </div>
+
+          <h4 class="font-semibold text-lg mb-2">
+            User cannot connect to workspace
+          </h4>
+          <p class="text-sm text-primary/70 mb-3">
+            The user reports sudden disconnects when joining meetings.
+          </p>
+
+          <div class="flex justify-between items-center gap-3 border-t border-primary pt-1.5">
+            <div class="text-xs text-primary/60">Created: 10/29/2025</div>
+            <div class="flex gap-5">
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div
+            class="bg-foreground/10 backdrop-blur-md rounded-xl p-4 border border-foreground/20 transform hover:scale-105 transition-all duration-300"
+          >
+            <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center mb-3">
+              <svg
+                class="w-6 h-6 text-secondary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                />
+              </svg>
+            </div>
+            <h5 class="font-semibold text-foreground mb-1">Auto-assignment</h5>
+            <p class="text-sm text-foreground/70">
+              Auto route tickets to the right agent based on skills and workload.
+            </p>
+          </div>
+
+          <div
+            class="bg-foreground/10 backdrop-blur-md rounded-xl p-4 border border-foreground/20 transform hover:scale-105 transition-all duration-300"
+          >
+            <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center mb-3">
+              <svg
+                class="w-6 h-6 text-secondary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h5 class="font-semibold text-foreground mb-1">SLA Alerts</h5>
+            <p class="text-sm text-foreground/70">
+              Get notified when tickets are near SLA deadlines so nothing slips through.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>

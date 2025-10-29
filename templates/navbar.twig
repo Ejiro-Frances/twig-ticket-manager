@@ -1,12 +1,38 @@
-<header class="fixed left-0 top-0 w-full z-50 h-20 flex justify-between items-center px-5 bg-primary text-foreground">
-    <p>Taskify</p>
+<header
+  aria-label="Main site header"
+  class="fixed left-0 top-0 w-full z-50 h-20 flex justify-between items-center px-5 bg-primary text-foreground"
+>
+  {# Brand logo #}
+  <a href="/" aria-label="Ticket Zen home" class="bg-secondary rounded-md px-2 py-2 font-bold">
+    Ticket Zen
+  </a>
 
-    <nav>
-        <ul class="flex gap-7">
-            <li class="py-2">Login</li>
-            <li class="bg-foreground text-primary px-5 py-2 rounded-md">
-                Get Started
-            </li>
-        </ul>
-    </nav>
+  {# Navigation links #}
+  <nav role="navigation" aria-label="Main navigation">
+    <ul class="flex gap-7">
+      {# login link #}
+      <li>
+        <a
+          href="/auth/login"
+          aria-label="Go to login page"
+          aria-current="{{ current_page == 'login' ? 'page' : '' }}"
+          class="cursor-pointer border border-transparent hover:border-foreground py-2 px-5 rounded-md transition-all duration-150 ease-in {% if current_page == 'login' %}border-foreground{% endif %}"
+        >
+          Login
+        </a>
+      </li>
+
+      {# signup link #}
+      <li>
+        <a
+          href="/auth/signup"
+          aria-label="Go to signup page"
+          aria-current="{{ current_page == 'signup' ? 'page' : '' }}"
+          class="bg-foreground hover:bg-foreground/90 cursor-pointer text-primary px-5 py-2 rounded-md transition-all duration-150 ease-in {% if current_page == 'signup' %}bg-foreground/90{% endif %}"
+        >
+          Get Started
+        </a>
+      </li>
+    </ul>
+  </nav>
 </header>
