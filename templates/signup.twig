@@ -1,10 +1,10 @@
-
-{% extends 'base.twig' %}
-
-{% block title %}Sign Up - Ticket Zen{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Ticket Zen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .error-message {
             color: rgb(248 113 113);
@@ -15,213 +15,202 @@
             border-color: rgb(239 68 68) !important;
         }
     </style>
-{% endblock %}
-
-{% block body %}
-<main data-testid="test-signup-page" class="relative min-h-screen flex items-center justify-center">
-    <!-- button to go back to home page -->
-    <a href="{{ path('home') }}" class="absolute top-4 left-4 z-10">
-        <button class="px-4 py-2 bg-foreground/20 text-foreground rounded-lg hover:bg-foreground/30 transition-all">
-            ← Back
-        </button>
-    </a>
-
-    <!-- SVG Background Pattern -->
-    <svg class="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="oklch(0.985 0 0)" stroke-width="1"/>
-            </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)"/>
-    </svg>
-
-    <!-- sign up form -->
-    <section data-testid="test-signup-form-container" class="w-full max-w-2xl bg-foreground/10 rounded-2xl shadow-2xl p-8 backdrop-blur-md border border-foreground/20">
-        <!-- heading -->
-        <div data-testid="test-signup-heading" class="text-center mb-8">
-            <h1 data-testid="test-signup-heading-text" class="text-3xl font-bold text-foreground mb-2">
-                Create Account
-            </h1>
-            <p class="text-foreground/70">
-                Sign up to get started with Ticket Zen
-            </p>
-        </div>
-
-        <!-- Display flash messages -->
-        {% for message in app.flashes('error') %}
-            <div class="mb-4 p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400">
-                {{ message }}
-            </div>
-        {% endfor %}
-
-        {% for message in app.flashes('success') %}
-            <div class="mb-4 p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400">
-                {{ message }}
-            </div>
-        {% endfor %}
-
-        <!-- form -->
-        <form data-testid="test-signup-form" method="post" action="{{ path('signup') }}" class="space-y-6" novalidate>
-            {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-
-            <!-- Name field -->
-            <div data-testid="test-name-container">
-                <label data-testid="test-name-label" for="{{ form.name.vars.id }}" class="block text-sm font-medium text-foreground mb-2">
-                    Full Name
-                </label>
-
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg data-testid="test-user-icon" class="h-5 w-5 text-foreground/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                    </div>
-                    {{ form_widget(form.name, {
-                        'attr': {
-                            'data-testid': 'test-name-input',
-                            'class': 'w-full pl-10 pr-3 py-3 rounded-lg bg-foreground/20 border border-foreground/30 text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all' ~ (form.name.vars.errors|length > 0 ? ' field-error' : ''),
-                            'placeholder': 'John Doe'
-                        }
-                    }) }}
-                </div>
-                {% if form.name.vars.errors|length > 0 %}
-                    <p data-testid="test-name-error" class="error-message">
-                        {{ form.name.vars.errors[0].message }}
-                    </p>
-                {% endif %}
-            </div>
-
-            <!-- Email field -->
-            <div data-testid="test-email-container">
-                <label data-testid="test-email-label" for="{{ form.email.vars.id }}" class="block text-sm font-medium text-foreground mb-2">
-                    Email Address
-                </label>
-
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg data-testid="test-mail-icon" class="h-5 w-5 text-foreground/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                    {{ form_widget(form.email, {
-                        'attr': {
-                            'data-testid': 'test-email-input',
-                            'class': 'w-full pl-10 pr-3 py-3 rounded-lg bg-foreground/20 border border-foreground/30 text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all' ~ (form.email.vars.errors|length > 0 ? ' field-error' : ''),
-                            'placeholder': 'johndoe@example.com'
-                        }
-                    }) }}
-                </div>
-                {% if form.email.vars.errors|length > 0 %}
-                    <p data-testid="test-email-error" class="error-message">
-                        {{ form.email.vars.errors[0].message }}
-                    </p>
-                {% endif %}
-            </div>
-
-            <!-- Password field -->
-            <div data-testid="test-password-container">
-                <label data-testid="test-password-label" for="{{ form.password.vars.id }}" class="block text-sm font-medium text-foreground mb-2">
-                    Password
-                </label>
-
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg data-testid="test-lock-icon" class="h-5 w-5 text-foreground/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                        </svg>
-                    </div>
-
-                    {{ form_widget(form.password, {
-                        'attr': {
-                            'data-testid': 'test-password-input',
-                            'class': 'w-full pl-10 pr-10 py-3 rounded-lg bg-foreground/20 border border-foreground/30 text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all' ~ (form.password.vars.errors|length > 0 ? ' field-error' : ''),
-                            'placeholder': 'Password'
-                        }
-                    }) }}
-                    <button data-testid="test-show-password-button" type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('{{ form.password.vars.id }}', 'password-eye', 'password-eye-off')">
-                        <svg id="password-eye" data-testid="test-show-password-icon" class="h-5 w-5 text-foreground/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                        </svg>
-                        <svg id="password-eye-off" data-testid="test-hide-password-icon" class="h-5 w-5 text-foreground/50 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-                        </svg>
-                    </button>
-                </div>
-                {% if form.password.vars.errors|length > 0 %}
-                    <p data-testid="test-password-error" class="error-message">
-                        {{ form.password.vars.errors[0].message }}
-                    </p>
-                {% endif %}
-            </div>
-
-            <!-- confirm password -->
-            <div data-testid="test-confirm-password-container">
-                <label data-testid="test-password-label" for="{{ form.confirmPassword.vars.id }}" class="block text-sm font-medium text-foreground mb-2">
-                    Confirm Password
-                </label>
-
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg data-testid="test-lock-icon" class="h-5 w-5 text-foreground/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                        </svg>
-                    </div>
-                    {{ form_widget(form.confirmPassword, {
-                        'attr': {
-                            'data-testid': 'test-confirm-password-input',
-                            'class': 'w-full pl-10 pr-10 py-3 rounded-lg bg-foreground/20 border border-foreground/30 text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all' ~ (form.confirmPassword.vars.errors|length > 0 ? ' field-error' : ''),
-                            'placeholder': 'Confirm Password'
-                        }
-                    }) }}
-                    <button data-testid="test-show-confirm-password-button" type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('{{ form.confirmPassword.vars.id }}', 'confirm-eye', 'confirm-eye-off')">
-                        <svg id="confirm-eye" data-testid="test-show-confirm-password-icon" class="h-5 w-5 text-foreground/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                        </svg>
-                        <svg id="confirm-eye-off" data-testid="test-hide-confirm-password-icon" class="h-5 w-5 text-foreground/50 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-                        </svg>
-                    </button>
-                </div>
-                {% if form.confirmPassword.vars.errors|length > 0 %}
-                    <p data-testid="test-confirm-password-error" class="error-message">
-                        {{ form.confirmPassword.vars.errors[0].message }}
-                    </p>
-                {% endif %}
-            </div>
-
-            <!-- terms of service info -->
-            <p data-testid="test-terms-of-service-info" class="mt-4 text-center text-foreground/50 text-xs">
-                By signing up, you agree to our Terms of Service and Privacy Policy.
-            </p>
-
-            <!-- CSRF token -->
-            {{ form_widget(form._token) }}
-
-            <!-- submit button -->
-            <button type="submit" data-testid="test-submit-button" class="w-full bg-secondary text-primary py-3 rounded-lg font-medium hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
-                Sign Up
+</head>
+<body>
+    <main data-testid="test-signup-page" class="relative min-h-screen flex items-center justify-center bg-gray-900">
+        <!-- button to go back to home page -->
+        <a href="/" class="absolute top-4 left-4 z-10">
+            <button class="px-4 py-2 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-all">
+                ← Back
             </button>
+        </a>
 
-            {{ form_end(form) }}
-        </form>
+        <!-- SVG Background Pattern -->
+        <svg class="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="oklch(0.985 0 0)" stroke-width="1"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+        </svg>
 
-        <div data-testid="test-login-link" class="mt-6 text-center">
-            <p class="text-foreground/70">
-                Already have an account?
-                <a href="{{ path('login') }}" class="font-medium text-secondary hover:text-secondary/80 transition-colors ml-1.5">
-                    Log in
-                </a>
-            </p>
-        </div>
-    </section>
-</main>
-{% endblock %}
+        <!-- sign up form -->
+        <section data-testid="test-signup-form-container" class="w-full max-w-2xl bg-white/10 rounded-2xl shadow-2xl p-8 backdrop-blur-md border border-white/20 relative z-10">
+            <!-- heading -->
+            <div data-testid="test-signup-heading" class="text-center mb-8">
+                <h1 data-testid="test-signup-heading-text" class="text-3xl font-bold text-white mb-2">
+                    Create Account
+                </h1>
+                <p class="text-white/70">
+                    Sign up to get started with Ticket Zen
+                </p>
+            </div>
 
-{% block javascripts %}
-    {{ parent() }}
+            <!-- Display flash messages -->
+            {% if success_message %}
+                <div class="mb-4 p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400">
+                    {{ success_message }}
+                </div>
+            {% endif %}
+
+            <!-- form -->
+            <form data-testid="test-signup-form" method="POST" action="" class="space-y-6">
+                <!-- Name field -->
+                <div data-testid="test-name-container">
+                    <label data-testid="test-name-label" for="name" class="block text-sm font-medium text-white mb-2">
+                        Full Name
+                    </label>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg data-testid="test-user-icon" class="h-5 w-5 text-white/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <input
+                            data-testid="test-name-input"
+                            id="name"
+                            type="text"
+                            name="name"
+                            placeholder="John Doe"
+                            value="{{ formData.name }}"
+                            class="w-full pl-10 pr-3 py-3 rounded-lg bg-white/20 border {% if errors.name %}field-error{% else %}border-white/30{% endif %} text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        />
+                    </div>
+                    {% if errors.name %}
+                        <p data-testid="test-name-error" class="error-message">
+                            {{ errors.name }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Email field -->
+                <div data-testid="test-email-container">
+                    <label data-testid="test-email-label" for="email" class="block text-sm font-medium text-white mb-2">
+                        Email Address
+                    </label>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg data-testid="test-mail-icon" class="h-5 w-5 text-white/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <input
+                            data-testid="test-email-input"
+                            id="email"
+                            type="email"
+                            name="email"
+                            value="{{ formData.email }}"
+                            placeholder="johndoe@example.com"
+                            class="w-full pl-10 pr-3 py-3 rounded-lg bg-white/20 border {% if errors.email %}field-error{% else %}border-white/30{% endif %} text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        />
+                    </div>
+                    {% if errors.email %}
+                        <p data-testid="test-email-error" class="error-message">
+                            {{ errors.email }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Password field -->
+                <div data-testid="test-password-container">
+                    <label data-testid="test-password-label" for="password" class="block text-sm font-medium text-white mb-2">
+                        Password
+                    </label>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg data-testid="test-lock-icon" class="h-5 w-5 text-white/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+
+                        <input
+                            data-testid="test-password-input"
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="w-full pl-10 pr-10 py-3 rounded-lg bg-white/20 border {% if errors.password %}field-error{% else %}border-white/30{% endif %} text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            placeholder="Password"
+                        />
+                        <button data-testid="test-show-password-button" type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('password', 'password-eye', 'password-eye-off')">
+                            <svg id="password-eye" data-testid="test-show-password-icon" class="h-5 w-5 text-white/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            <svg id="password-eye-off" data-testid="test-hide-password-icon" class="h-5 w-5 text-white/50 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                            </svg>
+                        </button>
+                    </div>
+                    {% if errors.password %}
+                        <p data-testid="test-password-error" class="error-message">
+                            {{ errors.password }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- confirm password -->
+                <div data-testid="test-confirm-password-container">
+                    <label data-testid="test-password-label" for="confirmPassword" class="block text-sm font-medium text-white mb-2">
+                        Confirm Password
+                    </label>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg data-testid="test-lock-icon" class="h-5 w-5 text-white/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <input
+                            data-testid="test-confirm-password-input"
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            class="w-full pl-10 pr-10 py-3 rounded-lg bg-white/20 border {% if errors.confirmPassword %}field-error{% else %}border-white/30{% endif %} text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            placeholder="Confirm Password"
+                        />
+                        <button data-testid="test-show-confirm-password-button" type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('confirmPassword', 'confirm-eye', 'confirm-eye-off')">
+                            <svg id="confirm-eye" data-testid="test-show-confirm-password-icon" class="h-5 w-5 text-white/50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            <svg id="confirm-eye-off" data-testid="test-hide-confirm-password-icon" class="h-5 w-5 text-white/50 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                            </svg>
+                        </button>
+                    </div>
+                    {% if errors.confirmPassword %}
+                        <p data-testid="test-confirm-password-error" class="error-message">
+                            {{ errors.confirmPassword }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- terms of service info -->
+                <p data-testid="test-terms-of-service-info" class="mt-4 text-center text-white/50 text-xs">
+                    By signing up, you agree to our Terms of Service and Privacy Policy.
+                </p>
+
+                <!-- submit button -->
+                <button type="submit" data-testid="test-submit-button" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all cursor-pointer">
+                    Sign Up
+                </button>
+            </form>
+
+            <div data-testid="test-login-link" class="mt-6 text-center">
+                <p class="text-white/70">
+                    Already have an account?
+                    <a href="/auth/login" class="font-medium text-blue-400 hover:text-blue-300 transition-colors ml-1.5">
+                        Log in
+                    </a>
+                </p>
+            </div>
+        </section>
+    </main>
+
     <script>
         function togglePassword(inputId, eyeId, eyeOffId) {
             const input = document.getElementById(inputId);
@@ -239,4 +228,5 @@
             }
         }
     </script>
-{% endblock %}
+</body>
+</html>

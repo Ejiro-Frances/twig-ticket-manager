@@ -32,11 +32,14 @@
 <body>
     {% include 'navbar.twig' %}
     
-    <main class="pt-20">
+    <main class="pt-20 bg-primary min-h-screen">
         {% block content %}{% endblock %}
     </main>
 
-     {% include 'footer.twig' %}
+    {% if show_footer is not defined or show_footer %}
+    {% include 'footer.twig' %}
+    {% endif %}
+
 </body>
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
