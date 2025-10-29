@@ -1,3 +1,234 @@
-<footer class="h-10 flex items-center justify-center text-center bg-foreground border-t border-primary text-primary">
-    &copy; 2025 Taskify. All rights reserved.
+<footer
+  class="bg-gray-900 text-gray-300 py-12 px-4"
+  data-testid="test-footer"
+  role="contentinfo"
+  aria-label="Footer section"
+>
+  <div class="max-w-6xl mx-auto">
+    <!-- Grid sections -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8"
+      data-testid="test-footer-grid"
+      role="list"
+    >
+      <!-- Brand section -->
+      <div data-testid="test-footer-brand" role="listitem">
+        <h3
+          class="text-white font-bold text-xl mb-4"
+          data-testid="test-footer-brand-title"
+          role="heading"
+          aria-level="3"
+        >
+          Ticket Zen
+        </h3>
+        <p
+          class="mb-4"
+          data-testid="test-footer-brand-description"
+          aria-label="Company description"
+        >
+          Streamlining customer support for businesses of all sizes.
+        </p>
+
+        <div
+          class="flex space-x-4"
+          data-testid="test-footer-social-icons"
+          role="group"
+          aria-label="Social media links"
+        >
+          <a href="#" aria-label="Facebook link" data-testid="test-footer-facebook">
+            <i class="w-5 h-5 fab fa-facebook hover:text-white cursor-pointer"></i>
+          </a>
+          <a href="#" aria-label="Twitter link" data-testid="test-footer-twitter">
+            <i class="w-5 h-5 fab fa-twitter hover:text-white cursor-pointer"></i>
+          </a>
+          <a href="#" aria-label="LinkedIn link" data-testid="test-footer-linkedin">
+            <i class="w-5 h-5 fab fa-linkedin hover:text-white cursor-pointer"></i>
+          </a>
+          <a href="#" aria-label="Instagram link" data-testid="test-footer-instagram">
+            <i class="w-5 h-5 fab fa-instagram hover:text-white cursor-pointer"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product section -->
+      <div data-testid="test-footer-product" role="listitem">
+        <h4
+          class="text-white font-semibold mb-4"
+          data-testid="test-footer-product-title"
+          role="heading"
+          aria-level="4"
+        >
+          Product
+        </h4>
+        <ul class="space-y-2" data-testid="test-footer-product-list">
+          <li>
+            <a
+              href="#features"
+              class="hover:text-white transition-colors"
+              data-testid="test-footer-product-features"
+              aria-label="Navigate to features section"
+            >
+              Features
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-white transition-colors"
+              data-testid="test-footer-product-pricing"
+              aria-label="View pricing"
+            >
+              Pricing
+            </a>
+          </li>
+          <li>
+            <a
+              href="#testimonials"
+              class="hover:text-white transition-colors"
+              data-testid="test-footer-product-testimonials"
+              aria-label="Read testimonials"
+            >
+              Testimonials
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Company section -->
+      <div data-testid="test-footer-company" role="listitem">
+        <h4
+          class="text-white font-semibold mb-4"
+          data-testid="test-footer-company-title"
+          role="heading"
+          aria-level="4"
+        >
+          Company
+        </h4>
+        <ul class="space-y-2" data-testid="test-footer-company-list">
+          <li>
+            <a
+              href="#"
+              class="hover:text-white transition-colors"
+              data-testid="test-footer-about"
+              aria-label="About Ticket Zen"
+            >
+              About Us
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-white transition-colors"
+              data-testid="test-footer-careers"
+              aria-label="View career opportunities"
+            >
+              Careers
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-white transition-colors"
+              data-testid="test-footer-blog"
+              aria-label="Read our blog"
+            >
+              Blog
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact section -->
+      <div data-testid="test-footer-contact" role="listitem">
+        <h4
+          class="text-white font-semibold mb-4"
+          data-testid="test-footer-contact-title"
+          role="heading"
+          aria-level="4"
+        >
+          Contact
+        </h4>
+        <ul class="space-y-2" data-testid="test-footer-contact-list">
+          <li class="flex items-center">
+            <i
+              class="w-4 h-4 mr-2 fas fa-envelope"
+              aria-hidden="true"
+              data-testid="test-footer-mail-icon"
+            ></i>
+            <a
+              href="mailto:hello@ticketzen.com"
+              class="hover:text-white transition-colors"
+              data-testid="test-footer-mail-link"
+              aria-label="Email Ticket Zen"
+            >
+              hello@ticketzen.com
+            </a>
+          </li>
+          <li class="flex items-center">
+            <i
+              class="w-4 h-4 mr-2 fas fa-phone"
+              aria-hidden="true"
+              data-testid="test-footer-phone-icon"
+            ></i>
+            <span
+              data-testid="test-footer-phone"
+              aria-label="Company phone number"
+            >
+              +1 (555) 123-4567
+            </span>
+          </li>
+          <li class="flex items-center">
+            <i
+              class="w-4 h-4 mr-2 fas fa-map-marker-alt"
+              aria-hidden="true"
+              data-testid="test-footer-location-icon"
+            ></i>
+            <span
+              data-testid="test-footer-address"
+              aria-label="Company address"
+            >
+              123 Tech Street, San Francisco, CA
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom section -->
+    <div
+      class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center"
+      data-testid="test-footer-bottom"
+      role="contentinfo"
+    >
+      <p
+        data-testid="test-footer-copyright"
+        aria-label="Copyright information"
+      >
+        &copy; {{ "now"|date("Y") }} Ticket Zen. All rights reserved.
+      </p>
+      <div
+        class="flex space-x-6 mt-4 md:mt-0"
+        data-testid="test-footer-legal-links"
+        role="group"
+        aria-label="Legal links"
+      >
+        <a
+          href="#"
+          class="hover:text-white transition-colors"
+          data-testid="test-footer-privacy"
+          aria-label="Privacy Policy"
+        >
+          Privacy Policy
+        </a>
+        <a
+          href="#"
+          class="hover:text-white transition-colors"
+          data-testid="test-footer-terms"
+          aria-label="Terms of Service"
+        >
+          Terms of Service
+        </a>
+      </div>
+    </div>
+  </div>
 </footer>
